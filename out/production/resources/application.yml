@@ -1,0 +1,16 @@
+cloud:
+  aws:
+    credentials:
+      accessKey: AKIAYXQ6DX7E4TCDHZXQ
+      secretKey: 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
+    s3:
+      bucket: alcohol-bucket
+    region:
+      static: ap-northeast-2
+    stack:
+      auto: false
+  spring:
+    servlet:
+      multipart:
+        max-file-size: 1000000MB
+        max-request-size: 1000000MB

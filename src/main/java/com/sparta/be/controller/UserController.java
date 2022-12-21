@@ -36,6 +36,4 @@ public class UserController {
     public CompleteResponseDto idCheck(@PathVariable String username) {
         return userService.idCheck(username);
     }
-
-
 }

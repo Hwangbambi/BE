@@ -117,7 +117,7 @@ public class WebSecurityConfig {
                 .antMatchers(HttpMethod.POST, "/api/user/**").permitAll()
                 .antMatchers(HttpMethod.GET,"/api/posts").permitAll()
                 .antMatchers(HttpMethod.GET, "/api/post/**").permitAll()
-                .antMatchers(HttpMethod.GET, "/api/user/login-page").permitAll()
+//                .antMatchers(HttpMethod.GET, "/api/user/login-page").permitAll()
                 .antMatchers("/api/doc").permitAll()
                 .antMatchers(HttpMethod.GET,"/api/tops/**").permitAll()
 //                .antMatchers("/swagger-ui/**").permitAll() //스웨거 권한설정 X
@@ -132,7 +132,7 @@ public class WebSecurityConfig {
                 .and().addFilterBefore(new JwtAuthFilter(jwtUtil), UsernamePasswordAuthenticationFilter.class);
 
         // Custom 로그인 페이지 사용
-        http.formLogin().loginPage("/api/user/login-page").permitAll();
+//        http.formLogin().loginPage("/api/user/login-page").permitAll();
         // 접근 제한 페이지 이동 설정
 //          http.exceptionHandling().accessDeniedPage("/api/user/forbidden");
 
@@ -147,7 +147,7 @@ public class WebSecurityConfig {
         // 서버에서 응답하는 리소스에 접근 가능한 출처를 명시
         // Access-Control-Allow-Origin
         config.addAllowedOrigin("http://localhost:3000");
-//        config.addAllowedOrigin("http://charleybucket.s3-website.ap-northeast-2.amazonaws.com"); //요거 변경하시면 됩니다.
+        config.addAllowedOrigin("http://sulproject.s3-website.ap-northeast-2.amazonaws.com/"); //요거 변경하시면 됩니다.
 
         // 특정 헤더를 클라이언트 측에서 꺼내어 사용할 수 있게 지정
         // 만약 지정하지 않는다면, Authorization 헤더 내의 토큰 값을 사용할 수 없음

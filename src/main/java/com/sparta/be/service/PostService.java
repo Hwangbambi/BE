@@ -27,13 +27,9 @@ public class PostService {
 
     public ResponseEntity<?> savePost(String title, String content, String category, String imageUrl, User user) throws IOException {
 
-
         PostRequestDto postRequestDto = new PostRequestDto(title, content, category, imageUrl);
 
         postRepository.saveAndFlush(new Post(postRequestDto, user));
-
-
-
 
         return ResponseEntity.ok(new ResponseDto("게시글 작성 완료", HttpStatus.OK.value()));
     }

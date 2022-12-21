@@ -57,7 +57,7 @@ public class PostController {
     }
 
     //게시글 수정
-    @PutMapping("post/{id}")
+    @PatchMapping("post/{id}")
     public ResponseEntity<?> postUpdate(@PathVariable Long id, @RequestParam String title, @RequestParam String content, @RequestParam String category,
                                         @RequestPart(value = "file") MultipartFile multipartFile,
                                         @AuthenticationPrincipal UserDetailsImpl userDetails) {

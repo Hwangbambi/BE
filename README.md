@@ -31,5 +31,5 @@
 [API설계](https://www.notion.so/SA-7-a638bed536bb4b7f9a92ad6b0fac8fa2#a68aa12d14e14e349be983b1c87ae9a8)
 
 ## ✨Swagger설계
-![image](https://user-images.githubusercontent.com/55370369/208972068-f22eb0fa-4110-4fa2-a719-7e5fb63700b7.png)
+![image](https://user-images.githubusercontent.com/55370369/208973058-995e03ac-c813-4032-a51f-66bf9406f511.png)
 

@@ -18,7 +18,6 @@ import org.springframework.transaction.annotation.Transactional;
 public class CommentService {
 
     private final CommentRepository commentRepository;
-
     private final PostRepository postRepository;
 
     @Transactional

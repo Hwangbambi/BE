@@ -47,51 +47,6 @@ public class WebSecurityConfig {
 //                .requestMatchers(PathRequest.toStaticResources().atCommonLocations());
 //    }
 
-    //    @Bean
-//    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-//        http.csrf().disable();
-//        http.cors();
-//
-//        // 기본 설정인 Session 방식은 사용하지 않고 JWT 방식을 사용하기 위한 설정
-//        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-//
-//        http.authorizeRequests()
-//                .antMatchers("/api/user/**").permitAll()
-//                .antMatchers("/api/posts").permitAll()
-//                .antMatchers("/api/post/**").permitAll()
-//                .anyRequest().authenticated()
-//                .and().addFilterBefore(new JwtAuthFilter(jwtUtil), UsernamePasswordAuthenticationFilter.class);
-//
-//        http.formLogin().loginPage("/api/user/login-page").permitAll();
-//
-////        http.addFilterBefore(new CustomSecurityFilter(userDetailsService, passwordEncoder()), UsernamePasswordAuthenticationFilter.class);
-//
-//
-//        http
-//                .exceptionHandling()
-//
-//                // 401 Error 처리, Authorization 즉, 인증과정에서 실패할 시 처리
-//                .authenticationEntryPoint(customAuthenticationEntryPoint)
-//
-////                 403 Error 처리, 인증과는 별개로 추가적인 권한이 충족되지 않는 경우
-//                .accessDeniedHandler(customAccessDeniedHandler)
-//
-//                .and()
-//                .headers()
-//                .frameOptions()
-//                .disable()
-//
-//                // 이 설정을 해주지 않으면 밑의 corsConfigurationSource가 적용되지 않습니다.
-//                .and()
-//                .cors() // cors 처리
-//
-//                .and()
-//                .sessionManagement()
-//                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-//
-//
-//        return http.build();
-//    }
 //
 //    /**
 //     * 이 설정을 해주면, 우리가 설정한대로 CorsFilter가 Security의 filter에 추가되어
@@ -106,7 +61,6 @@ public class WebSecurityConfig {
         // CSRF 설정
         http.csrf().disable();
         http.cors().configurationSource(corsConfigurationSource());
-        http.cors();
 
 
         // 기본 설정인 Session 방식은 사용하지 않고 JWT 방식을 사용하기 위한 설정
@@ -117,9 +71,8 @@ public class WebSecurityConfig {
                 .antMatchers(HttpMethod.POST, "/api/user/**").permitAll()
                 .antMatchers(HttpMethod.GET,"/api/posts").permitAll()
                 .antMatchers(HttpMethod.GET, "/api/post/**").permitAll()
-                .antMatchers(HttpMethod.GET, "/api/user/login-page").permitAll()
-                .antMatchers("/api/doc").permitAll()
-                .antMatchers(HttpMethod.GET,"/api/tops/**").permitAll()
+//                .antMatchers(HttpMethod.GET, "/api/user/login-page").permitAll()
+                .antMatchers(HttpMethod.GET,"/api/tops").permitAll()
 //                .antMatchers("/swagger-ui/**").permitAll() //스웨거 권한설정 X
 //                .antMatchers("/swagger-resources/**").permitAll() //스웨거 권한설정 X
 //                .antMatchers("/swagger-ui.html").permitAll() //스웨거 권한설정 X
@@ -132,7 +85,7 @@ public class WebSecurityConfig {
                 .and().addFilterBefore(new JwtAuthFilter(jwtUtil), UsernamePasswordAuthenticationFilter.class);
 
         // Custom 로그인 페이지 사용
-        http.formLogin().loginPage("/api/user/login-page").permitAll();
+//        http.formLogin().loginPage("/api/user/login-page").permitAll();
         // 접근 제한 페이지 이동 설정
 //          http.exceptionHandling().accessDeniedPage("/api/user/forbidden");
 

@@ -32,12 +32,19 @@ public class UserService {
     @Transactional   // 회원가입
     public CompleteResponseDto signup(SignupRequestDto signupRequestDto) {
         String username = signupRequestDto.getUsername();
+        String pw = signupRequestDto.getPassword();
+        String pwcheck = signupRequestDto.getPasswordcheck();
         String password = passwordEncoder.encode(signupRequestDto.getPassword());
 
         // 중복검사
         Optional<User> found = userRepository.findByUsername(username);
         if (found.isPresent()) {
             throw new RestApiException(UserErrorCode.OVERLAPPED_USERNAME);
+        }
+
+        // password - passwordcheck 검사
+        if (!pw.equals(pwcheck)) {
+            throw new RestApiException(UserErrorCode.WRONG_PASSWORD);
         }
 
         //관리자 검사
@@ -73,5 +80,15 @@ public class UserService {
         response.addHeader(JwtUtil.AUTHORIZATION_HEADER, jwtUtil.createToken(user.getUsername(), user.getRole()));
         return CompleteResponseDto.success("로그인 성공");
     }
+
+    // id 중복체크
+    @Transactional
+    public CompleteResponseDto idCheck(String username) {
+        Optional<User> found = userRepository.findByUsername(username);
+        if (found.isPresent()) {
+            throw new RestApiException(UserErrorCode.OVERLAPPED_USERNAME);
+        }
+        return CompleteResponseDto.success("사용할 수 있는 아이디입니다.");
+    }   //수정해야함  중복은아닌데  정규식에 걸릴수있음
 
 }

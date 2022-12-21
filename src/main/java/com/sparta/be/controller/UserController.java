@@ -31,4 +31,11 @@ public class UserController {
         return userService.login(loginRequestDto, response);
     }
 
+    // id 중복체크
+    @GetMapping("/idCheck/{username}")
+    public CompleteResponseDto idCheck(@PathVariable String username) {
+        return userService.idCheck(username);
+    }
+
+
 }

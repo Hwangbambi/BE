@@ -47,7 +47,6 @@ public class WebSecurityConfig {
 //                .requestMatchers(PathRequest.toStaticResources().atCommonLocations());
 //    }
 
-//
 //    /**
 //     * 이 설정을 해주면, 우리가 설정한대로 CorsFilter가 Security의 filter에 추가되어
 //     * 예비 요청에 대한 처리를 해주게 됩니다.
@@ -74,12 +73,12 @@ public class WebSecurityConfig {
 //                .antMatchers(HttpMethod.GET, "/api/user/login-page").permitAll()
                 .antMatchers(HttpMethod.GET,"/api/tops").permitAll()
 
-//                .antMatchers("/swagger-ui/**").permitAll() //스웨거 권한설정 X
-//                .antMatchers("/swagger-resources/**").permitAll() //스웨거 권한설정 X
-//                .antMatchers("/swagger-ui.html").permitAll() //스웨거 권한설정 X
-//                .antMatchers("/v2/api-docs").permitAll() //스웨거 권한설정 X
-//                .antMatchers("/v3/api-docs").permitAll() //스웨거 권한설정 X
-//                .antMatchers("/webjars/**").permitAll() //스웨거 권한설정 X
+                .antMatchers("/swagger-ui/**").permitAll() //스웨거 권한설정 X
+                .antMatchers("/swagger-resources/**").permitAll() //스웨거 권한설정 X
+                .antMatchers("/swagger-ui.html").permitAll() //스웨거 권한설정 X
+                .antMatchers("/v2/api-docs").permitAll() //스웨거 권한설정 X
+                .antMatchers("/v3/api-docs").permitAll() //스웨거 권한설정 X
+                .antMatchers("/webjars/**").permitAll() //스웨거 권한설정 X
 
                 .anyRequest().authenticated()
                 //서버는 JWT 토큰을 검증하고 토큰의 정보를 사용하여 사용자의 인증을 진행해주는 Spring Security 에 등록한 JwtAuthFilter 를 사용하여 인증/인가를 처리한다.

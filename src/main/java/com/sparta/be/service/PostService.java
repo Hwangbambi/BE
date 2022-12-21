@@ -53,6 +53,7 @@ public class PostService {
 
         category = "food";
         List<Post> foodList = postRepository.findTop5ByCategoryOrderByLikesDesc(category);
+
         //작성일 기준 내림차순
         for (Post post : drinkList) {
             postListResponseDto.addDrinkList(new PostResponseDto(post));
@@ -122,9 +123,9 @@ public class PostService {
 
         return ResponseEntity.ok(new ResponseDto("게시글 삭제 완료", HttpStatus.OK.value()));
     }
-    
+
     @Transactional
-    public ResponseEntity<?> postUpdate(Long id, String title, String content, int category, MultipartFile file, User user) {
+    public ResponseEntity<?> postUpdate(Long id, String title, String content, String category, MultipartFile file, User user) {
         //user 와 작성자 일치 여부 확인
         if (!postRepository.existsByIdAndUser(id, user)) {
             return ResponseEntity.ok(new ResponseDto("글 작성자만 수정 가능합니다.", HttpStatus.BAD_REQUEST.value()));
@@ -132,7 +133,20 @@ public class PostService {
 
         Post post = postRepository.findById(id).orElseThrow();
 
-        post.updateViews(post.getViews()+1);
+        //첨부파일 있을 경우 파일 삭제 처리
+        if (post.getImageUrl() != null) {
+            String fileName = post.getImageUrl().split(".com/")[1];
+            awsS3Service.deleteFile(fileName);
+        }
+
+        //수정 할 첨부파일로 업로드
+        String imageUrl = null;
+
+        if (!file.isEmpty()) {
+            imageUrl = awsS3Service.uploadFile(file);
+        }
+
+        post.updateViews(title, content, category, imageUrl);
 
         return ResponseEntity.ok(new ResponseDto("게시글 수정 완료", HttpStatus.OK.value()));
 

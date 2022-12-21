@@ -58,4 +58,11 @@ public class Post extends Timestamped{
         this.views = views;
     }
 
+    public void updateViews(String title, String content, String category, String imageUrl) {
+        this.title = title;
+        this.content = content;
+        this.category = category;
+        this.imageUrl = imageUrl;
+    }
+
 }

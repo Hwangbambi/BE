@@ -7,7 +7,7 @@
 
 2022년 12월 16일 ~ 2022년 12월 22일
 
-## 👯팀원
+## 🎄팀원
 
 - [오연주BE](https://github.com/OhYeonJu)(팀장)
 - [유종열BE](https://github.com/jongyeol2)
@@ -30,4 +30,6 @@
 
 [API설계](https://www.notion.so/SA-7-a638bed536bb4b7f9a92ad6b0fac8fa2#a68aa12d14e14e349be983b1c87ae9a8)
 
+## ✨Swagger설계
+![image](https://user-images.githubusercontent.com/55370369/208972068-f22eb0fa-4110-4fa2-a719-7e5fb63700b7.png)
 

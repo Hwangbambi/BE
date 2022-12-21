@@ -32,8 +32,8 @@ public class PostController {
     //게시글 작성 및 파일 업로드
     @PostMapping("/post")
     public ResponseEntity<?> uploadFile(@RequestParam String title, @RequestParam String content, @RequestParam String category,
-                                   @RequestPart(value = "file") MultipartFile multipartFile,
-                                   @AuthenticationPrincipal UserDetailsImpl userDetails) throws IOException {
+                                        @RequestPart(value = "file") MultipartFile multipartFile,
+                                        @AuthenticationPrincipal UserDetailsImpl userDetails) throws IOException {
 
         String imageUrl = null;
 
@@ -57,10 +57,11 @@ public class PostController {
     }
 
     //게시글 수정
-    @PatchMapping("post/{id}")
-    public ResponseEntity<?> postUpdate(@PathVariable Long id, @RequestParam String title, @RequestParam String content, @RequestParam int category,
+    @PutMapping("post/{id}")
+    public ResponseEntity<?> postUpdate(@PathVariable Long id, @RequestParam String title, @RequestParam String content, @RequestParam String category,
                                         @RequestPart(value = "file") MultipartFile multipartFile,
                                         @AuthenticationPrincipal UserDetailsImpl userDetails) {
+
         return postService.postUpdate(id,title,content,category,multipartFile,userDetails.getUser());
     }
 

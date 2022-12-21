@@ -1,9 +1,6 @@
 package com.sparta.be.service;
 
-import com.sparta.be.dto.PostListResponseDto;
-import com.sparta.be.dto.PostRequestDto;
-import com.sparta.be.dto.PostResponseDto;
-import com.sparta.be.dto.ResponseDto;
+import com.sparta.be.dto.*;
 
 import com.sparta.be.entity.*;
 import com.sparta.be.repository.PostRepository;
@@ -43,7 +40,7 @@ public class PostService {
 
     @Transactional(readOnly = true)
     public ResponseEntity<?> Top() {
-        PostListResponseDto postListResponseDto = new PostListResponseDto();
+        TopListResponseDto topResponseDto = new TopListResponseDto();
 
         String category = "drink";
         List<Post> drinkList = postRepository.findTop5ByCategoryOrderByLikesDesc(category);
@@ -56,17 +53,17 @@ public class PostService {
 
         //작성일 기준 내림차순
         for (Post post : drinkList) {
-            postListResponseDto.addDrinkList(new PostResponseDto(post));
+            topResponseDto.addDrinkList(new PostResponseDto(post));
         }
         for (Post post : recipeList) {
-            postListResponseDto.addRecipeList(new PostResponseDto(post));
+            topResponseDto.addRecipeList(new PostResponseDto(post));
         }
         for (Post post : foodList) {
-            postListResponseDto.addFoodList(new PostResponseDto(post));
+            topResponseDto.addFoodList(new PostResponseDto(post));
         }
 
 
-        return ResponseEntity.ok(postListResponseDto);
+        return ResponseEntity.ok(topResponseDto);
     }
 
 

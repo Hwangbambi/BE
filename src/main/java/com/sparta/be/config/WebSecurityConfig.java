@@ -117,9 +117,9 @@ public class WebSecurityConfig {
                 .antMatchers(HttpMethod.POST, "/api/user/**").permitAll()
                 .antMatchers(HttpMethod.GET,"/api/posts").permitAll()
                 .antMatchers(HttpMethod.GET, "/api/post/**").permitAll()
-                .antMatchers(HttpMethod.GET, "/api/user/login-page").permitAll()
+//                .antMatchers(HttpMethod.GET, "/api/user/login-page").permitAll()
                 .antMatchers("/api/doc").permitAll()
-                .antMatchers(HttpMethod.GET,"/api/tops/**").permitAll()
+                .antMatchers(HttpMethod.GET,"/api/tops").permitAll()
 //                .antMatchers("/swagger-ui/**").permitAll() //스웨거 권한설정 X
 //                .antMatchers("/swagger-resources/**").permitAll() //스웨거 권한설정 X
 //                .antMatchers("/swagger-ui.html").permitAll() //스웨거 권한설정 X

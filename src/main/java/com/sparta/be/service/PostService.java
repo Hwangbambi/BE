@@ -32,6 +32,10 @@ public class PostService {
             imageUrl = awsS3Service.uploadFile(postRequestDto.getFile());
         }
 
+        System.out.println("postRequestDto.getTitle() : " + postRequestDto.getTitle());
+        System.out.println("postRequestDto.getContent() : " + postRequestDto.getContent());
+        System.out.println("postRequestDto.getCategory() : " + postRequestDto.getCategory());
+
         PostRequestDto requestDto = new PostRequestDto(postRequestDto.getTitle(), postRequestDto.getContent(), postRequestDto.getCategory(), imageUrl);
 
         postRepository.saveAndFlush(new Post(requestDto, user));

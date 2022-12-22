@@ -33,7 +33,7 @@ public class UserService {
     public CompleteResponseDto signup(SignupRequestDto signupRequestDto) {
         String username = signupRequestDto.getUsername();
         String pw = signupRequestDto.getPassword();
-        String pwcheck = signupRequestDto.getPasswordcheck();
+        String pwcheck = signupRequestDto.getCheckPassword();
         String password = passwordEncoder.encode(signupRequestDto.getPassword());
 
         // 중복검사

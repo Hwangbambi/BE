@@ -40,17 +40,10 @@ public class PostController {
     //게시글 작성 및 파일 업로드
     @ApiOperation(value = "게시글 작성 및 파일 업로드")
     @PostMapping("/post")
-    public ResponseEntity<?> uploadFile(@RequestPart String title, @RequestPart String content, @RequestPart String category,
-                                        @RequestPart(value = "imageUrl") MultipartFile multipartFile,
+    public ResponseEntity<?> uploadFile(@ModelAttribute PostRequestDto postRequestDto,
                                         @AuthenticationPrincipal UserDetailsImpl userDetails) throws IOException {
 
-        String imageUrl = null;
-
-        if (!multipartFile.isEmpty()) {
-            imageUrl = awsS3Service.uploadFile(multipartFile);
-        }
-
-        return postService.savePost(title, content, category, imageUrl, userDetails.getUser());
+        return postService.savePost(postRequestDto, userDetails.getUser());
     }
 
     //게시글 상세 조회

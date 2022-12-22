@@ -60,15 +60,15 @@ public class PostController {
         return postService.postDelete(id, userDetails.getUser());
     }
 
-    /*게시글 수정
+    //게시글 수정
     @ApiOperation(value = "게시글 수정")
     @PatchMapping("post/{id}")
-    public ResponseEntity<?> postUpdate(@PathVariable Long id, @RequestParam String title, @RequestParam String content, @RequestParam String category,
-                                        @RequestPart(value = "imageUrl") MultipartFile multipartFile,
+    public ResponseEntity<?> postUpdate(@PathVariable Long id,
+                                        @ModelAttribute PostRequestDto postRequestDto,
                                         @AuthenticationPrincipal UserDetailsImpl userDetails) {
 
-        return postService.postUpdate(id,title,content,category,multipartFile,userDetails.getUser());
-    }*/
+        return postService.postUpdate(id,postRequestDto,userDetails.getUser());
+    }
 
     // 게시글 좋아요
     // ResponseEntity 구조 : HttpStatus, HttpHeaders, HttpBody

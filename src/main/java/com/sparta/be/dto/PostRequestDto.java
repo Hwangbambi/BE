@@ -4,6 +4,7 @@ import com.sparta.be.entity.User;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.Column;
 import java.util.List;
@@ -14,11 +15,9 @@ import java.util.List;
 public class PostRequestDto {
 
     private String title;
-
     private String content;
-
     private String category;
-
+    private MultipartFile file;
     private String imageUrl;
 
     public PostRequestDto(String title, String content, String category, String imageUrl) {

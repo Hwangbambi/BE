@@ -1,5 +1,6 @@
 package com.sparta.be.controller;
 
+import com.sparta.be.dto.PostRequestDto;
 import com.sparta.be.security.UserDetailsImpl;
 import com.sparta.be.service.AwsS3Service;
 import com.sparta.be.service.LikeService;
@@ -39,17 +40,10 @@ public class PostController {
     //게시글 작성 및 파일 업로드
     @ApiOperation(value = "게시글 작성 및 파일 업로드")
     @PostMapping("/post")
-    public ResponseEntity<?> uploadFile(@RequestParam String title, @RequestParam String content, @RequestParam String category,
-                                        @RequestPart(value = "imageUrl") MultipartFile multipartFile,
+    public ResponseEntity<?> uploadFile(@ModelAttribute PostRequestDto postRequestDto,
                                         @AuthenticationPrincipal UserDetailsImpl userDetails) throws IOException {
 
-        String imageUrl = null;
-
-        if (!multipartFile.isEmpty()) {
-            imageUrl = awsS3Service.uploadFile(multipartFile);
-        }
-
-        return postService.savePost(title, content, category, imageUrl, userDetails.getUser());
+        return postService.savePost(postRequestDto, userDetails.getUser());
     }
 
     //게시글 상세 조회
@@ -66,7 +60,7 @@ public class PostController {
         return postService.postDelete(id, userDetails.getUser());
     }
 
-    //게시글 수정
+    /*게시글 수정
     @ApiOperation(value = "게시글 수정")
     @PatchMapping("post/{id}")
     public ResponseEntity<?> postUpdate(@PathVariable Long id, @RequestParam String title, @RequestParam String content, @RequestParam String category,
@@ -74,7 +68,7 @@ public class PostController {
                                         @AuthenticationPrincipal UserDetailsImpl userDetails) {
 
         return postService.postUpdate(id,title,content,category,multipartFile,userDetails.getUser());
-    }
+    }*/
 
     // 게시글 좋아요
     // ResponseEntity 구조 : HttpStatus, HttpHeaders, HttpBody

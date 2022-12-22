@@ -24,12 +24,17 @@ public class PostService {
 
 
     @Transactional
+    public ResponseEntity<?> savePost(PostRequestDto postRequestDto, User user) throws IOException {
+        String imageUrl = null;
 
-    public ResponseEntity<?> savePost(String title, String content, String category, String imageUrl, User user) throws IOException {
+        //첨부파일 존재할 때
+        if (!postRequestDto.getFile().isEmpty()) {
+            imageUrl = awsS3Service.uploadFile(postRequestDto.getFile());
+        }
 
-        PostRequestDto postRequestDto = new PostRequestDto(title, content, category, imageUrl);
+        PostRequestDto requestDto = new PostRequestDto(postRequestDto.getTitle(), postRequestDto.getContent(), postRequestDto.getCategory(), imageUrl);
 
-        postRepository.saveAndFlush(new Post(postRequestDto, user));
+        postRepository.saveAndFlush(new Post(requestDto, user));
 
         return ResponseEntity.ok(new ResponseDto("게시글 작성 완료", HttpStatus.OK.value()));
     }
@@ -117,7 +122,7 @@ public class PostService {
         return ResponseEntity.ok(new ResponseDto("게시글 삭제 완료", HttpStatus.OK.value()));
     }
 
-    @Transactional
+    /*@Transactional
     public ResponseEntity<?> postUpdate(Long id, String title, String content, String category, MultipartFile file, User user) {
         //user 와 작성자 일치 여부 확인
         if (!postRepository.existsByIdAndUser(id, user)) {
@@ -143,5 +148,33 @@ public class PostService {
 
         return ResponseEntity.ok(new ResponseDto("게시글 수정 완료", HttpStatus.OK.value()));
 
-    }
+        Post post = postRepository.findById(id).orElseThrow();
+
+        String imageUrl = null;
+
+        //기존 글에 첨부파일 존재시
+        if (post.getImageUrl() != null) {
+            if (!file.isEmpty()) {
+                //첨부파일 수정시 기존 첨부파일 삭제 및 새로운 파일로 업로드
+                String fileName = post.getImageUrl().split(".com/")[1];
+                awsS3Service.deleteFile(fileName);
+
+            } else {
+                //첨부파일 수정 안함
+                imageUrl = post.getImageUrl();
+            }
+        } else {
+            //첨부파일 없는 글에
+            if (!file.isEmpty()) {
+                //첨부파일 적용
+
+            }
+        }
+
+        //새로운 첨부파일로 업로드
+        imageUrl = awsS3Service.uploadFile(file);
+        post.updateViews(title, content, category, imageUrl);
+
+        return ResponseEntity.ok(new ResponseDto("게시글 수정 완료", HttpStatus.OK.value()));
+    }*/
 }

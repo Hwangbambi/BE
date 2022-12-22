@@ -38,7 +38,7 @@ public class PostController {
 
 
     //게시글 작성 및 파일 업로드
-    @ApiOperation(value = "게시글 작성 및 파일 업로드")
+    @ApiOperation(value = "게시 글 작성 및 파일 업로드")
     @PostMapping("/post")
     public ResponseEntity<?> uploadFile(@RequestPart String title, @RequestPart String content, @RequestPart String category,
                                         @RequestPart(value = "imageUrl") MultipartFile multipartFile,

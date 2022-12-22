@@ -28,12 +28,12 @@ public class Comment {
     private User user;
 
     public Comment(Post post, CommentRequestDto commentRequestDto, User user) {
-        content = commentRequestDto.getComment();
+        content = commentRequestDto.getContent();
         this.post = post;
         this.user = user;
     }
 
     public void update(CommentRequestDto commentRequestDto) {
-        content = commentRequestDto.getComment();
+        content = commentRequestDto.getContent();
     }
 }

@@ -41,3 +41,6 @@ application.yml
 
 ### VS Code ###
 .vscode/
+out/production/resources/application-security.properties
+out/production/resources/application-security.properties
+out/production/resources/application-security.properties

@@ -28,7 +28,7 @@ public class Comment {
     private User user;
 
     public Comment(Post post, CommentRequestDto commentRequestDto, User user) {
-        content = commentRequestDto.getContent();
+        this.content = commentRequestDto.getContent();
         this.post = post;
         this.user = user;
     }

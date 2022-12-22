@@ -32,7 +32,7 @@ dependencies {
 	testImplementation 'org.springframework.security:spring-security-test'
 
 	//aws 접근 와....
-//	implementation 'org.springframework.cloud:spring-cloud-starter-aws:2.4.2:'
+// implementation 'org.springframework.cloud:spring-cloud-starter-aws:2.4.2:'
 	implementation 'io.awspring.cloud:spring-cloud-starter-aws:2.4.2'
 
 	// JWT 관련

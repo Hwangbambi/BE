@@ -24,11 +24,17 @@ public class PostService {
 
 
     @Transactional
-    public ResponseEntity<?> savePost(String title, String content, String category, String imageUrl, User user) throws IOException {
+    public ResponseEntity<?> savePost(PostRequestDto postRequestDto, User user) throws IOException {
+        String imageUrl = null;
 
-        PostRequestDto postRequestDto = new PostRequestDto(title, content, category, imageUrl);
+        //첨부파일 존재할 때
+        if (!postRequestDto.getFile().isEmpty()) {
+            imageUrl = awsS3Service.uploadFile(postRequestDto.getFile());
+        }
 
-        postRepository.saveAndFlush(new Post(postRequestDto, user));
+        PostRequestDto requestDto = new PostRequestDto(postRequestDto.getTitle(), postRequestDto.getContent(), postRequestDto.getCategory(), imageUrl);
+
+        postRepository.saveAndFlush(new Post(requestDto, user));
 
         return ResponseEntity.ok(new ResponseDto("게시글 작성 완료", HttpStatus.OK.value()));
     }

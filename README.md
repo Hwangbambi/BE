@@ -18,6 +18,7 @@
 - [양진규FE](https://github.com/jjolraman)
 
 ## 와이어프레임
+![술이술술](https://media.discordapp.net/attachments/1037267111585792020/1053338900812288010/83963AE8-9190-42BA-9656-592672551756.gif?width=856&height=504)
 
 ## 🛠️Tech Stacks
 
